@@ -3,15 +3,62 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 25.0.1700.3
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScheduleBot.Core", "ScheduleBot.Core", "{4B97CADA-1C6F-4A32-92C5-BA7961E51987}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScheduleBot.Common", "ScheduleBot.Common", "{B9E90B16-7728-421C-BE4E-F58D8C849A28}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScheduleBot.Business Logic", "ScheduleBot.Business Logic", "{8665A08A-6598-4D8F-87CD-D9067E689AF0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScheduleBot.Model", "ScheduleBot.Model", "{D9B8586C-AE4B-4AE7-96A3-C852E15C0800}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleBot.Common", "ScheduleBot.Common\ScheduleBot.Common.csproj", "{AF5EAE12-00AB-4645-9751-05FA0CF6FF8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleBot.BusinessLogic", "ScheduleBot.BusinessLogic\ScheduleBot.BusinessLogic.csproj", "{8DA0D17B-F4F9-444C-ACFA-CF905F85C0EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleBot.BusinessLogic.Telegram", "ScheduleBot.BusinessLogic.Telegram\ScheduleBot.BusinessLogic.Telegram.csproj", "{BCB99091-7CD5-4A94-BCEE-F8832790E1B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleBot.Model", "ScheduleBot.Model\ScheduleBot.Model.csproj", "{1B0A2EFF-3A7D-4908-9AE7-0807F554E100}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScheduleBot", "ScheduleBot\ScheduleBot.csproj", "{95937E2F-620A-4AE1-A2C7-DB42E1B5253B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF5EAE12-00AB-4645-9751-05FA0CF6FF8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF5EAE12-00AB-4645-9751-05FA0CF6FF8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF5EAE12-00AB-4645-9751-05FA0CF6FF8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF5EAE12-00AB-4645-9751-05FA0CF6FF8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DA0D17B-F4F9-444C-ACFA-CF905F85C0EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DA0D17B-F4F9-444C-ACFA-CF905F85C0EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DA0D17B-F4F9-444C-ACFA-CF905F85C0EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DA0D17B-F4F9-444C-ACFA-CF905F85C0EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCB99091-7CD5-4A94-BCEE-F8832790E1B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCB99091-7CD5-4A94-BCEE-F8832790E1B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCB99091-7CD5-4A94-BCEE-F8832790E1B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCB99091-7CD5-4A94-BCEE-F8832790E1B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B0A2EFF-3A7D-4908-9AE7-0807F554E100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B0A2EFF-3A7D-4908-9AE7-0807F554E100}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B0A2EFF-3A7D-4908-9AE7-0807F554E100}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B0A2EFF-3A7D-4908-9AE7-0807F554E100}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95937E2F-620A-4AE1-A2C7-DB42E1B5253B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95937E2F-620A-4AE1-A2C7-DB42E1B5253B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95937E2F-620A-4AE1-A2C7-DB42E1B5253B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95937E2F-620A-4AE1-A2C7-DB42E1B5253B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {073A3DF0-7F52-4C95-B177-47487E0FC79B}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AF5EAE12-00AB-4645-9751-05FA0CF6FF8E} = {B9E90B16-7728-421C-BE4E-F58D8C849A28}
+		{8DA0D17B-F4F9-444C-ACFA-CF905F85C0EB} = {8665A08A-6598-4D8F-87CD-D9067E689AF0}
+		{BCB99091-7CD5-4A94-BCEE-F8832790E1B8} = {8665A08A-6598-4D8F-87CD-D9067E689AF0}
+		{1B0A2EFF-3A7D-4908-9AE7-0807F554E100} = {D9B8586C-AE4B-4AE7-96A3-C852E15C0800}
+		{95937E2F-620A-4AE1-A2C7-DB42E1B5253B} = {4B97CADA-1C6F-4A32-92C5-BA7961E51987}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Microsoft.Extensions.DependencyInjection" />
+    <None Remove="Microsoft.EntityFrameworkCore" />
+    <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
+    <None Remove="Telegram.Bot" />
+    <None Remove="AutoMapper" />
+    <None Remove="Controllers\" />
+    <None Remove="Helper\" />
+    <None Remove="Helper\Hendler\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
+    <PackageReference Include="Telegram.Bot" Version="18.0.0" />
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ScheduleBot.Common\ScheduleBot.Common.csproj" />
+    <ProjectReference Include="..\ScheduleBot.BusinessLogic.Telegram\ScheduleBot.BusinessLogic.Telegram.csproj" />
+    <ProjectReference Include="..\ScheduleBot.BusinessLogic\ScheduleBot.BusinessLogic.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Helper\" />
+    <Folder Include="Helper\Hendler\" />
+  </ItemGroup>
+</Project>
