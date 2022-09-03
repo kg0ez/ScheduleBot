@@ -27,5 +27,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ScheduleBot.Model\ScheduleBot.Model.csproj" />
     <ProjectReference Include="..\ScheduleBot.Common\ScheduleBot.Common.csproj" />
+    <ProjectReference Include="..\Parser\Parser.csproj" />
   </ItemGroup>
 </Project>

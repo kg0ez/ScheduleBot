@@ -1,4 +1,5 @@
-﻿using ScheduleBot.BusinessLogic.Services.Interfaces;
+﻿using System.Threading;
+using ScheduleBot.BusinessLogic.Services.Interfaces;
 using ScheduleBot.Common.Schedule;
 using ScheduleBot.Model.Models;
 using Telegram.Bot;
@@ -10,44 +11,102 @@ namespace ScheduleBot.Helper.Hendler
 	public class MessegeHendler
 	{
         private ReplyKeyboardMarkup _mainKeyboard { get; }
+        private ReplyKeyboardMarkup _backKeyboard { get; }
         private IScheduleService _scheduleService;
+        private string[] Days = { "Понедельник", "Вторник", "Среда","Четверг","Пятница","Суббота"};
 
         public MessegeHendler(IScheduleService scheduleService)
 		{
             _scheduleService = scheduleService;
              _mainKeyboard =  new(new[]
                     { new KeyboardButton[] { "🧊 Ледовая арена", "🏊‍♀️ Бассейн" },
-                new KeyboardButton[] { "🏃‍♀️ Стадион", "🏋️ Тренажёрный зал" } })
+                new KeyboardButton[] { "🏋️ Тренажёрный зал", "🏋️ ТЗ (Гребная база)" } ,
+                new KeyboardButton[] { "🏃‍♀️ Стадион","🤽 Тренировочное поле" }})
              { ResizeKeyboard = true};
+
+            _backKeyboard = new(
+                    new KeyboardButton[] { "🔙 Назад" })
+            { ResizeKeyboard = true };
 
         }
         public async Task HandleMessage(ITelegramBotClient botClient, Message message)
         {
-            if (message.Text == "/start")
+            if (message.Text == "/start" || message.Text == "🔙 Назад")
             {
-                await botClient.SendTextMessageAsync(message.Chat.Id, "hi",replyMarkup: _mainKeyboard);
+                await botClient.SendTextMessageAsync(message.Chat.Id, "Выберите объект",replyMarkup: _mainKeyboard);
                 return;
             }
             if (message.Text == "🧊 Ледовая арена")
             {
-                var visitingTimes =  _scheduleService.Get(FacilityID.IceArena);
+                string schedule = ShowShedul(FacilityName.IceArena);
+                await botClient.SendTextMessageAsync(message.Chat.Id, schedule, Telegram.Bot.Types.Enums.ParseMode.Html, replyMarkup: _backKeyboard);
+                return;
             }
             if (message.Text == "🏊‍♀️ Бассейн")
             {
-                var visitingTimes = _scheduleService.Get(FacilityID.SwimmingPool);
-
+                string schedule = ShowShedul(FacilityName.SwimmingPool);
+                await botClient.SendTextMessageAsync(message.Chat.Id, schedule, Telegram.Bot.Types.Enums.ParseMode.Html, replyMarkup: _backKeyboard);
+                return;
             }
             if (message.Text == "🏃‍♀️ Стадион")
             {
-                var visitingTimes = _scheduleService.Get(FacilityID.Stadium);
+                string schedule = ShowShedul(FacilityName.Stadium);
 
+                await botClient.SendTextMessageAsync(message.Chat.Id, schedule, Telegram.Bot.Types.Enums.ParseMode.Html, replyMarkup: _backKeyboard);
+                return;
             }
             if (message.Text == "🏋️ Тренажёрный зал")
             {
-                var visitingTimes = _scheduleService.Get(FacilityID.Gym);
-
+                string schedule = ShowShedul("Тренажерный зал");
+                await botClient.SendTextMessageAsync(message.Chat.Id, schedule, Telegram.Bot.Types.Enums.ParseMode.Html, replyMarkup: _backKeyboard);
+                return;
+            }
+            if (message.Text == "🏋️ ТЗ (Гребная база)")
+            {
+                string schedule = ShowShedul("Тренажерный зал (Гребная база №1)");
+                await botClient.SendTextMessageAsync(message.Chat.Id, schedule, Telegram.Bot.Types.Enums.ParseMode.Html, replyMarkup: _backKeyboard);
+                return;
+            }
+            if (message.Text == "🤽 Тренировочное поле")
+            {
+                string schedule = ShowShedul(FacilityName.TraningField);
+                await botClient.SendTextMessageAsync(message.Chat.Id, schedule, Telegram.Bot.Types.Enums.ParseMode.Html, replyMarkup: _backKeyboard);
+                return;
             }
             await botClient.SendTextMessageAsync(message.Chat.Id, $"Команда: " + message.Text + "не найдена");
+        }
+        private string ShowShedul(string facility)
+        {
+            var obj = _scheduleService.Set(facility);
+
+            if (obj == null)
+                return "Cамоотработки нет";
+
+            if (obj.NameFacility.Contains("Тренажерный зал (Гребная база №1)")
+                && facility == "Тренажерный зал")
+                return "Cамоотработки нет";
+            
+            string schedule = $"<b>{facility}</b>" + Environment.NewLine;
+            int index = 0;
+            foreach (var days in obj.Schedule)
+            {
+                var isSchedule = true;
+                foreach (var day in days)
+                {
+                    if (days.Count == 1 && day.Length == 1)
+                        break;
+
+                    if (isSchedule)
+                    {
+                        schedule += $"<b>{Days[index]}</b>" + Environment.NewLine;
+                        isSchedule = false;
+                    }
+                    schedule += day + Environment.NewLine;
+                }
+                schedule += Environment.NewLine;
+                index++;
+            }
+            return schedule;
         }
     }
 }

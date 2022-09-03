@@ -12,4 +12,7 @@
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.45" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ScheduleBot.Common\ScheduleBot.Common.csproj" />
+  </ItemGroup>
 </Project>

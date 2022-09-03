@@ -2,15 +2,16 @@
 using System.Text;
 using System.Xml;
 using HtmlAgilityPack;
+using ScheduleBot.Common.Dto;
 
 namespace Parser
 {
     public static class ScheduleParser
     {
-        public static List<List<string>> GetShedule()
+        public static List<ScheduleDto> GetShedule()
         {
-            List<string> days = new List<string>();
-            List<List<string>> facilityInfo = new List<List<string>>();
+            List<ScheduleDto> facilityInfo = new List<ScheduleDto>();
+            var time = new List<List<string>>();
 
             HtmlWeb web = new HtmlWeb();
             web.OverrideEncoding = Encoding.UTF8;
@@ -24,8 +25,6 @@ namespace Parser
                 else
                 {
                     var facilitySplit = node.InnerText.Split('\n');
-
-                    facilityInfo.Add(new List<string> { facilitySplit[0] });
 
                     for (int i = 1; i < facilitySplit.Length - 1; i++)
                     {
@@ -46,11 +45,17 @@ namespace Parser
                                     str = string.Empty;
                                 }
                             }
-                            facilityInfo.Add(timeVisiting);
+                            time.Add(timeVisiting);
                         }
                         else
-                            facilityInfo.Add(new List<string> { facilitySplit[i] });
+                            time.Add(new List<string> { facilitySplit[i] });
                     }
+                    facilityInfo.Add(new ScheduleDto
+                    {
+                        NameFacility = facilitySplit[0],
+                        Schedule = time
+                    });
+                    time = new List<List<string>>();
                 }
             }
             return facilityInfo;

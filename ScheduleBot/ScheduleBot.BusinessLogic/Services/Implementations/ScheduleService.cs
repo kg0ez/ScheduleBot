@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Parser;
 using ScheduleBot.BusinessLogic.Services.Interfaces;
 using ScheduleBot.Common.Dto;
 using ScheduleBot.Model.Data;
@@ -24,6 +25,19 @@ namespace ScheduleBot.BusinessLogic.Services.Implementations
 			var visitingTimeDto = Mapper.Map<List<VisitingTimeDto>>(visitingTime);
 
 			return visitingTimeDto;
+        }
+
+		public ScheduleDto Set(string Namefacility)
+        {
+			var schedule = ScheduleParser.GetShedule();
+            foreach (var facility in schedule)
+            {
+                if (facility.NameFacility.Contains(Namefacility))
+                {
+					return facility;
+                }
+            }
+			return null;
         }
 	}
 }
