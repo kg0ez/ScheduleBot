@@ -11,11 +11,6 @@ namespace ScheduleBot.Model.Data
 			Database.EnsureCreated();
 		}
 
-		//protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-		//{
-		//	optionsBuilder.UseSqlServer("Server=localhost;Database=Schedule;User Id=sa;Password=Valuetech@123;");
-		//}
-
 		public DbSet<Facility> Facilities  { get; set; } = null!;
 		public DbSet<VisitingTime> VisitingTimes  { get; set; } = null!;
 	}

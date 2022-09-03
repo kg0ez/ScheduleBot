@@ -11,8 +11,6 @@ using ScheduleBot.Model.Data;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 
-
-
 var serviceProvider = new ServiceCollection()
     .AddLogging()
     .AddSingleton<IScheduleService, ScheduleService>()
@@ -50,7 +48,6 @@ botClient.StartReceiving(
     errorService.HandleError,
     receiverOptions,
     cancellationToken: cts.Token);
-
 
 Console.ReadLine();
 cts.Cancel();

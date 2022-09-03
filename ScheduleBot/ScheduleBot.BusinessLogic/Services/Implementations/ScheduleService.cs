@@ -27,7 +27,7 @@ namespace ScheduleBot.BusinessLogic.Services.Implementations
 			return visitingTimeDto;
         }
 
-		public ScheduleDto Set(string Namefacility)
+		public ScheduleDto Get(string Namefacility)
         {
 			var schedule = ScheduleParser.GetShedule();
             foreach (var facility in schedule)

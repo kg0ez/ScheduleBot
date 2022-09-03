@@ -25,22 +25,9 @@ namespace ScheduleBot.Controllers
                     await _messageHendler.HandleMessage(botClient, update.Message);
                     return;
                 }
-
-                if (update.Type == UpdateType.CallbackQuery)
-                {
-                    await HandleCallbackQuery(botClient, update.CallbackQuery);
-                    return;
-                }
             }
             catch { }
         }
-
-        public async Task HandleCallbackQuery(ITelegramBotClient botClient,
-            CallbackQuery callbackQuery)
-        {
-            
-        }
-
     }
 }
 

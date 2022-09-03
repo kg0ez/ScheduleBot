@@ -13,7 +13,17 @@ namespace ScheduleBot.Helper.Hendler
         private ReplyKeyboardMarkup _mainKeyboard { get; }
         private ReplyKeyboardMarkup _backKeyboard { get; }
         private IScheduleService _scheduleService;
-        private string[] Days = { "Понедельник", "Вторник", "Среда","Четверг","Пятница","Суббота"};
+
+        private string[] _days = { "Понедельник", "Вторник", "Среда","Четверг","Пятница","Суббота"};
+        private Dictionary<string, string> _iconTime = new Dictionary<string, string>()
+            {
+                { "08","🕣"},
+                { "10","🕙"},
+                { "12","🕛"},
+                { "13","🕜"},
+                { "15","🕒"},
+                { "19","🕢"},
+            };
 
         public MessegeHendler(IScheduleService scheduleService)
 		{
@@ -73,11 +83,11 @@ namespace ScheduleBot.Helper.Hendler
                 await botClient.SendTextMessageAsync(message.Chat.Id, schedule, Telegram.Bot.Types.Enums.ParseMode.Html, replyMarkup: _backKeyboard);
                 return;
             }
-            await botClient.SendTextMessageAsync(message.Chat.Id, $"Команда: " + message.Text + "не найдена");
+            await botClient.SendTextMessageAsync(message.Chat.Id, $"Команда: " + message.Text + " не найдена");
         }
         private string ShowShedul(string facility)
         {
-            var obj = _scheduleService.Set(facility);
+            var obj = _scheduleService.Get(facility);
 
             if (obj == null)
                 return "Cамоотработки нет";
@@ -85,8 +95,9 @@ namespace ScheduleBot.Helper.Hendler
             if (obj.NameFacility.Contains("Тренажерный зал (Гребная база №1)")
                 && facility == "Тренажерный зал")
                 return "Cамоотработки нет";
-            
+
             string schedule = $"<b>{facility}</b>" + Environment.NewLine;
+            schedule += Environment.NewLine;
             int index = 0;
             foreach (var days in obj.Schedule)
             {
@@ -98,12 +109,21 @@ namespace ScheduleBot.Helper.Hendler
 
                     if (isSchedule)
                     {
-                        schedule += $"<b>{Days[index]}</b>" + Environment.NewLine;
+                        schedule += $"<b>{_days[index]}</b>" + Environment.NewLine;
                         isSchedule = false;
                     }
-                    schedule += day + Environment.NewLine;
+
+                    var hour = day.Substring(0,2);
+
+                    foreach (var icon in _iconTime)
+                        if (icon.Key == hour)
+                            hour = icon.Value;
+
+                    schedule += $"<i>{hour} {day}</i>" + Environment.NewLine;
                 }
-                schedule += Environment.NewLine;
+
+                if(!isSchedule)
+                    schedule += Environment.NewLine;
                 index++;
             }
             return schedule;
