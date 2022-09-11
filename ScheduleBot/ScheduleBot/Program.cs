@@ -18,8 +18,7 @@ var scheduleService = serviceProvider.GetService<IScheduleService>()!;
 
 var botController = new BotController(scheduleService);
 
-var botClient = new TelegramBotClient("5726356653:AAGXjHVNFVUpenZ_lbklREZv4JagXJ2K2ek");
-//var botClient = new TelegramBotClient("5486041835:AAEbtji4oRTHwDnH6SYd22gveg30MHN3Z-Q");
+var botClient = new TelegramBotClient("5486041835:AAEbtji4oRTHwDnH6SYd22gveg30MHN3Z-Q");
 
 using var cts = new CancellationTokenSource();
 
