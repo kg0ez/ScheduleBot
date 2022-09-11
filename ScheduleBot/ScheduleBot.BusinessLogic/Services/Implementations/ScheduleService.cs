@@ -9,6 +9,7 @@ namespace ScheduleBot.BusinessLogic.Services.Implementations
 		public ScheduleDto Get(string Namefacility)
         {
 			var schedule = ScheduleParser.GetShedule();
+
             foreach (var facility in schedule)
             {
                 if (facility.NameFacility.Contains(Namefacility))

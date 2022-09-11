@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Xml;
+﻿using System.Text;
 using HtmlAgilityPack;
 using ScheduleBot.Common.Dto;
 

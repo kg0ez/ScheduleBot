@@ -13,8 +13,8 @@ var serviceProvider = new ServiceCollection()
     .AddSingleton<IErrorService, ErrorService>()
     .BuildServiceProvider();
 
-var errorService = serviceProvider.GetService<IErrorService>();
-var scheduleService = serviceProvider.GetService<IScheduleService>();
+var errorService = serviceProvider.GetService<IErrorService>()!;
+var scheduleService = serviceProvider.GetService<IScheduleService>()!;
 
 var botController = new BotController(scheduleService);
 

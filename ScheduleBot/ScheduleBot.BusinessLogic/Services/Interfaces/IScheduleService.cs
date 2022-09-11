@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using ScheduleBot.Common.Dto;
+﻿using ScheduleBot.Common.Dto;
 
 namespace ScheduleBot.BusinessLogic.Services.Interfaces
 {
