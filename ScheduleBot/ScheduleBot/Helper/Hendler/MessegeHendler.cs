@@ -22,6 +22,8 @@ namespace ScheduleBot.Helper.Hendler
                 { "12","🕛"},
                 { "13","🕜"},
                 { "15","🕒"},
+                { "16","🕔"},
+                { "17","🕔"},
                 { "19","🕢"},
             };
 
@@ -67,7 +69,7 @@ namespace ScheduleBot.Helper.Hendler
             }
             if (message.Text == "🏋️ Тренажёрный зал")
             {
-                string schedule = ShowShedul("Тренажерный зал");
+                string schedule = ShowShedul("Тренажерный зал (УСЗ №21,22)");
                 await botClient.SendTextMessageAsync(message.Chat.Id, schedule, Telegram.Bot.Types.Enums.ParseMode.Html, replyMarkup: _backKeyboard);
                 return;
             }
