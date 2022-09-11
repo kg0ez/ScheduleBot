@@ -1,7 +1,5 @@
-﻿using System.Threading;
-using ScheduleBot.BusinessLogic.Services.Interfaces;
+﻿using ScheduleBot.BusinessLogic.Services.Interfaces;
 using ScheduleBot.Common.Schedule;
-using ScheduleBot.Model.Models;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.ReplyMarkups;

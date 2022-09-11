@@ -8,15 +8,12 @@
 
   <ItemGroup>
     <None Remove="Helpers\" />
-    <None Remove="Helper\Mapper\" />
     <None Remove="AutoMapper" />
     <None Remove="Services\" />
     <None Remove="Services\Interface\" />
     <None Remove="Services\Implementations\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helper\" />
-    <Folder Include="Helper\Mapper\" />
     <Folder Include="Services\" />
     <Folder Include="Services\Interfaces\" />
     <Folder Include="Services\Implementations\" />
@@ -25,7 +22,6 @@
     <PackageReference Include="AutoMapper" Version="11.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ScheduleBot.Model\ScheduleBot.Model.csproj" />
     <ProjectReference Include="..\ScheduleBot.Common\ScheduleBot.Common.csproj" />
     <ProjectReference Include="..\Parser\Parser.csproj" />
   </ItemGroup>
