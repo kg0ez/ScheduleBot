@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 using HtmlAgilityPack;
 using ScheduleBot.Common.Dto;
 
@@ -6,6 +7,9 @@ namespace Parser
 {
     public static class ScheduleParser
     {
+        private static readonly int LENGTH_INVISIBLE_ElEMENTS = 3;
+        private static readonly int LENGTH_TIME_VISITING = 11;
+
         public static List<ScheduleDto> GetShedule()
         {
             List<ScheduleDto> facilityInfo = new List<ScheduleDto>();
@@ -26,7 +30,16 @@ namespace Parser
 
                     for (int i = 1; i < facilitySplit.Length - 1; i++)
                     {
-                        if (facilitySplit[i].Length > 11)
+                        if (facilitySplit[i].Contains("\t"))
+                        {
+                            facilitySplit[i] = facilitySplit[i].Replace("\t\t\t", "");
+
+                            if (new StringInfo(facilitySplit[i]).LengthInTextElements > LENGTH_INVISIBLE_ElEMENTS)
+                                time[time.Count - 1].Add(facilitySplit[i]);
+                            
+                            facilitySplit[i] = string.Empty;
+                        }
+                        if (facilitySplit[i].Length > LENGTH_TIME_VISITING)
                         {
                             string str = string.Empty;
 
@@ -37,7 +50,7 @@ namespace Parser
                             for (int j = 0, strLength = 1; j < timeOneDay.Length; j++, strLength++)
                             {
                                 str += timeOneDay[j];
-                                if (strLength % 11 == 0)
+                                if (strLength % LENGTH_TIME_VISITING == 0)
                                 {
                                     timeVisiting.Add(str);
                                     str = string.Empty;
@@ -45,7 +58,7 @@ namespace Parser
                             }
                             time.Add(timeVisiting);
                         }
-                        else
+                        else if (facilitySplit[i]!=string.Empty)
                             time.Add(new List<string> { facilitySplit[i] });
                     }
                     facilityInfo.Add(new ScheduleDto
